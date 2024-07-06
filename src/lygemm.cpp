@@ -38,27 +38,27 @@ void ly_dgemm(const int& m,
         const auto ba2 = _mm256_loadu_pd(B + (l + 2) * n);
         const auto ba3 = _mm256_loadu_pd(B + (l + 3) * n);
 
-        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp1, 0x00), ba0, tmp1);
-        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp2, 0x55), ba1, tmp2);
-        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp3, 0xaa), ba2, tmp3);
-        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp4, 0xff), ba3, tmp4);
+        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp1, 0x00), ba0, tmp1);
+        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp2, 0x55), ba1, tmp2);
+        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp3, 0xaa), ba2, tmp3);
+        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp4, 0xff), ba3, tmp4);
 
-        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp2, 0x00), ba0, tmp2);
-        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp1, 0x55), ba1, tmp1);
-        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp3, 0xff), ba3, tmp3);
-        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp4, 0xaa), ba2, tmp4);
+        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp2, 0x00), ba0, tmp2);
+        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp1, 0x55), ba1, tmp1);
+        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp3, 0xff), ba3, tmp3);
+        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp4, 0xaa), ba2, tmp4);
         
 
-        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp3, 0x00), ba0, tmp3);
-        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp2, 0xaa), ba2, tmp2);
-        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp4, 0x55), ba1, tmp4);
-        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp1, 0xaa), ba2, tmp1);
+        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp3, 0x00), ba0, tmp3);
+        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp2, 0xaa), ba2, tmp2);
+        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp4, 0x55), ba1, tmp4);
+        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp1, 0xaa), ba2, tmp1);
         
         
-        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp4, 0x00), ba0, tmp4);
-        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp3, 0x55), ba1, tmp3);
-        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp2, 0xff), ba3, tmp2);
-        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd(atmp1, 0xff), ba3, tmp1);
+        tmp4 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp4, 0x00), ba0, tmp4);
+        tmp3 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp3, 0x55), ba1, tmp3);
+        tmp2 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp2, 0xff), ba3, tmp2);
+        tmp1 = _mm256_fmadd_pd(_mm256_permute4x64_pd((__m256d)atmp1, 0xff), ba3, tmp1);
     }
     _mm256_storeu_pd(C, _mm256_add_pd(tmp1, _mm256_loadu_pd(C)));
     _mm256_storeu_pd(C + 1 * n, _mm256_add_pd(tmp2, _mm256_loadu_pd(C + 1 * n)));
