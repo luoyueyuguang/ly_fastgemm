@@ -1,16 +1,24 @@
-#!/usr/bin/bash
-all:
-	$(CXX) -c -fPIC src/* -Iinclude -mavx2 -mfma -O3 
-	if [ ! -d lib ]; then mkdir lib; fi
-	$(CXX) -shared -o lib/liblygemm.so lygemm.o 
-	mv lygemm.o lib/
-	rm -f src/lygemm.hpp.gch
+CXX ?= icpx
+CXX ?= g++
+CXX ?= clang++
 
-test:
-	g++ -o tests/test4x4 tests/test4x4.cpp -Llib -llygemm -mavx2 -mfma -O3 -Iinclude -lopenblas
-	LD_LIBRARY_PATH=lib:$LD_LIBRARY_PATH ./tests/test4x4
+CXXFLAGS += -O3 -mfma -mavx2 
 
+LIBDIR=lib
+INCDIR=include
+TESTDIR=tests
 
-clean:
-	rm -f lib/liblygemm.so lib/lygemm.o 
-	if [ -f tests/test4x4 ]; then rm tests/test4x4; fi
+.PHONY: all static shared clean test
+.INTERMEDIATE: lygemm.o
+
+all:static shared
+
+static:$(LIBDIR)/liblygemm.a(lygemm.o)
+
+shared:$(LIBDIR)/liblygemm.so
+
+test:test4x4
+
+clean:libclean inclean testclean
+	
+include lib/Makefile include/Makefile tests/Makefile 

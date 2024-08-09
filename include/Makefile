@@ -1,0 +1,2 @@
+inclean:
+	$(RM) $(INCDIR)/*.gch

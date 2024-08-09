@@ -79,7 +79,7 @@ void ly_dgemm(const int& m,
             _mm_storeu_pd(C + 1 * n, ctmp1);
     }
     else{
-         auto alpha = 1.0;
+        auto alpha = 1.0;
         auto beta = 1.0;
         const char transa = 'N', transb = 'N';
         dgemm_(&transa, &transb, &n, &m, &k, &alpha, B, &n, A, &k, &beta, C, &n);
