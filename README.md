@@ -1,6 +1,6 @@
 ## About this project
 
-- I find that for some small matrix, we can write some specific code to speed it.
+- I find that for some small matrix, we can write some specific code to speedup it.
 - Now, I have written a optimition code for 4x4 and 2x2
 - For some matrix, use my code.For others,use blas.
 
