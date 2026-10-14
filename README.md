@@ -19,7 +19,7 @@ lygemm::gemm_batch<8, 8, 8>(count, A, B, C); // `count` independent products
 ## What it is for
 
 Small matrices, the sizes that spend more time in call overhead than in
-arithmetic. `${}^3\sqrt{MNK} \le 64$` is the usual boundary definition
+arithmetic. $\sqrt[3]{MNK} \le 64$ is the usual boundary definition
 ([LIBXSMM](https://libxsmm.github.io/libxsmm/documentation/)).
 
 | Size | Where it comes from |
