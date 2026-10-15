@@ -24,8 +24,10 @@ $(BUILD)/test_correctness: tests/test_correctness.cpp $(HEADERS)
 	@mkdir -p $(BUILD)
 	$(CXX) $(CXXFLAGS) $(INCLUDE) $< -o $@
 
-# the same suite under the sanitizers; the guarded buffers of the test catch
-# out of bounds accesses that the sanitizers cannot see inside intrinsics
+# The same suite under the sanitizers.  They cover the reference code and the
+# staging loops; the guarded buffers cover what the object model cannot - an
+# access that stays inside a larger allocation, and generated code, neither of
+# which the sanitizers see at all.
 $(BUILD)/test_correctness_asan: tests/test_correctness.cpp $(HEADERS)
 	@mkdir -p $(BUILD)
 	$(CXX) $(CXXFLAGS) -fsanitize=address,undefined -fno-omit-frame-pointer $(INCLUDE) $< -o $@
